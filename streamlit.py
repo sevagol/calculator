@@ -76,7 +76,7 @@ storage_size = num_docs * doc_size / 1_000_000  # В GB
 instance_type = determine_instance_type(num_docs, doc_size)
 
 s3_storage = st.slider("S3 Storage (GB)", 1, 10_000, step=1)
-users_per_day = st.slider("Users per Day", 100, 100_000, step=100)
+users_per_day = st.slider("Users per Day", 100, 1000, step=100)
 
 # Расчет стоимости
 open_search_cost, rds_cost, ecs_cost, s3_cost, vpc_cost, load_balancer_cost, bastion_host_cost, total_cost = calculate_costs(
