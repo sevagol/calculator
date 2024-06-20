@@ -65,7 +65,7 @@ def determine_instance_type(num_docs, doc_size):
         return "m6g.4xlarge.search"
 
 # Заголовок приложения
-st.title("AWS Cost Estimator")
+st.title("Archive cost Estimator")
 
 # Ползунки для параметров
 num_docs = st.slider("Number of Documents", 1_000, 3_000_000, step=1_000)
