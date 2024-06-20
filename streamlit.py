@@ -78,10 +78,17 @@ instance_type = determine_instance_type(num_docs, doc_size)
 s3_storage = st.slider("S3 Storage (GB)", 1, 10_000, step=1)
 users_per_day = st.slider("Users per Day", 100, 1000, step=100)
 
+
+years = st.number_input("Number of Years", min_value=1, max_value=100, step=1)
+
+
 # Расчет стоимости
 open_search_cost, rds_cost, ecs_cost, s3_cost, vpc_cost, load_balancer_cost, bastion_host_cost, total_cost = calculate_costs(
     num_docs, doc_size, storage_size, instance_type, s3_storage, users_per_day
 )
+
+total_cost_yearly = total_cost * 12
+total_cost_period = total_cost_yearly * years
 
 # Отображение стоимости
 st.subheader("Cost Breakdown")
@@ -94,4 +101,7 @@ st.write(f"Load Balancer Cost: ${load_balancer_cost:.2f}/month")
 st.write(f"Bastion Host Cost: ${bastion_host_cost:.2f}/month")
 
 st.subheader("Total Cost")
-st.write(f"${total_cost:.2f}/month")
+
+st.write(f"Monthly Total Cost: ${total_cost:.2f}/month")
+st.write(f"Yearly Total Cost: ${total_cost_yearly:.2f}/year")
+st.write(f"Total Cost for {years} Years: ${total_cost_period:.2f}")
